@@ -14,7 +14,7 @@ export class AppController {
   @UseGuards(AuthGuard('jwt'))
   @Get('profile')
   getProfile(@Request() req) {
-    return req.user;
+    return `Hello, ${req.user.email}! Your user ID is ${req.user.userId}.`;
   }
 }
 
