@@ -3,12 +3,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { HttpService } from '@nestjs/axios';
 import { Model } from 'mongoose';
 import { Location } from './schemas/location.schema';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Injectable()
 export class AirQualityService {
   private readonly TTL = 5 * 60 * 1000; // 5 minutos
   private readonly API_URL = 'https://api.openaq.org/v3/locations?countries_id=67&bbox=-18.2000,27.6000,-13.2000,29.6000';
-  private readonly API_KEY = '18ad3e98f226c8e0d63da91aed6e89ae1ef5e2fd38c8e45ba66bb5454807a5e4';
+  private readonly API_KEY = process.env.API_KEY;
 
   constructor(
     @InjectModel(Location.name) private locationModel: Model<Location>,
